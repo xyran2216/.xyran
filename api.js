@@ -32,7 +32,7 @@ let methods = {
             Type: 'layer7'
         },
         MIXBIL: {
-            Command: 'cd /root/.xyran/ && node mixbil.js {url} {time} 32 4 px.txt',
+            Command: 'cd /root/.xyran/ && node mixbil.js {url} {time} 32 4',
             Type: 'layer7'
         },
         TLS: {
