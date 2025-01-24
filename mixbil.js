@@ -65,7 +65,7 @@ var randomCountry = countries[Math.floor(Math.random() * countries.length)];
  
  const secureContext = tls.createSecureContext(secureContextOptions);
  
- var proxyFile = "proxy.txt";
+ var proxyFile = "px.txt";
  var proxies = readLines(proxyFile);
  var userAgents = readLines("ua.txt");
  
