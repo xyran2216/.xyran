@@ -26,7 +26,7 @@ let methods = {
         TLSBYPASS: {
             Command: 'cd /root/.xyran/ && node tls-bypass.js {url} {time} 62 4 proxy.txt',
             Type: 'layer7'
-        }
+        },
         HTTPS: {
             Command: 'cd /root/.xyran/ && node https.js {url} {time} 64 4 proxy.txt --query %RAND% --log 200',
             Type: 'layer7'
