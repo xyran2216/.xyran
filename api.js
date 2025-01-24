@@ -111,7 +111,6 @@ function sendAttack(req, res, url, method, timeStr, port) {
 function startAttack(command, attackID, url, port, timeInt, method) {
     const process = exec(command, (err, stdout, stderr) => {
         if (err) {
-            console.log(`[ERROR] Failed to start attack ID ${attackID}: ${err.message}`);
             definitions.ServerData.Ongoing--;
             return;
         }
